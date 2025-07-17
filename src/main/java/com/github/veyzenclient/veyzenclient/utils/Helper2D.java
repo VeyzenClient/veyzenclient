@@ -16,6 +16,38 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Helper2D {
 
+    public static void drawMouseCenteredGradientRect(
+            float x, float y, float width, float height,
+            Color colorCenter, Color colorOuter, float mouseX, float mouseY
+    ) {
+        GlStateManager.disableTexture2D();
+        GL11.glBegin(GL11.GL_QUADS);
+
+        float[] centerRGBA = colorCenter.getRGBComponents(null);
+        float[] outerRGBA = colorOuter.getRGBComponents(null);
+
+        float radius = Math.max(width, height);
+
+        for (int i = 0; i < 4; i++) {
+            float vx = (i % 2 == 0) ? x : x + width;
+            float vy = (i < 2) ? y : y + height;
+
+            float dist = (float) Math.hypot(mouseX - vx, mouseY - vy);
+            float t = Math.min(dist / radius, 1f); // [0..1]
+
+            float r = outerRGBA[0] * t + centerRGBA[0] * (1 - t);
+            float g = outerRGBA[1] * t + centerRGBA[1] * (1 - t);
+            float b = outerRGBA[2] * t + centerRGBA[2] * (1 - t);
+            float a = outerRGBA[3] * t + centerRGBA[3] * (1 - t);
+
+            GL11.glColor4f(r, g, b, a);
+            GL11.glVertex2f(vx, vy);
+        }
+
+        GL11.glEnd();
+        GlStateManager.enableTexture2D();
+    }
+
     /**
      * Draws a rounded Rectangle on the HUD using quarter circles and rectangles
      *

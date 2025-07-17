@@ -3,7 +3,7 @@ package com.github.veyzenclient.veyzenclient.utils;
 import net.minecraft.client.renderer.GlStateManager;
 public class FontRenderer {
 
-    private static UnicodeFontRenderer ufc;
+    public static UnicodeFontRenderer ufc;
     public static void initFont(){
         ufc = UnicodeFontRenderer.getFontOnPC("Arial",35);
     }
