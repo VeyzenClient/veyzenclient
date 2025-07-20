@@ -13,7 +13,13 @@ public class Mod {
     public ResourceLocation logo;
     public ModSettings settings = new ModSettings();
     public ArrayList<ModCategory> categories = new ArrayList<ModCategory>();
-    public Mod(String id, String name, String desc, ResourceLocation logo,ModCategory... categories){
+    public boolean favorite = false;
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public Mod(String id, String name, String desc, ResourceLocation logo, ModCategory... categories){
         this.id = id;
         this.name = name;
         this.description = desc;

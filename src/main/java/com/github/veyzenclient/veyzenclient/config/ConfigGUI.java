@@ -2,6 +2,7 @@ package com.github.veyzenclient.veyzenclient.config;
 
 import com.github.veyzenclient.veyzenclient.VeyzenClient;
 import com.github.veyzenclient.veyzenclient.config.buttons.CategoryButton;
+import com.github.veyzenclient.veyzenclient.config.buttons.FavButton;
 import com.github.veyzenclient.veyzenclient.features.Mod;
 import com.github.veyzenclient.veyzenclient.features.ModCategory;
 import com.github.veyzenclient.veyzenclient.features.ModManager;
@@ -9,6 +10,7 @@ import com.github.veyzenclient.veyzenclient.utils.Helper2D;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -24,6 +26,8 @@ public class ConfigGUI extends GuiScreen {
     public CategoryButton select;
     public int scale;
     public GuiTextField search;
+    public static boolean favOnly;
+
 
     public ConfigGUI(){
     this.scale = Minecraft.getMinecraft().gameSettings.guiScale;
@@ -53,11 +57,13 @@ public class ConfigGUI extends GuiScreen {
             this.buttonList.add(button);
             xi++;
         }
+
         updateModButtons();
         search.xPosition = sr.getScaledWidth() / 2 + menuWidth / 2 - 297;
         search.yPosition = yStart + 10;
         search.setEnableBackgroundDrawing(false);
         search.setTextColor(VeyzenClient.text.getRGB());
+        this.buttonList.add(new FavButton(599,sr.getScaledWidth() / 2 + menuWidth / 2 - 90,yStart - 2,32,32,new ResourceLocation("veyzen","icons/fav.png")));
     }
 
     private void updateModButtons() {
@@ -101,12 +107,17 @@ public class ConfigGUI extends GuiScreen {
                 count++;
             }
         }
-        System.out.println(count);
     }
 
     private ArrayList<Mod> getMods() {
             ArrayList<Mod> mods = new ArrayList<>();
-            for (Mod m : ModManager.mods.values()) {
+            ArrayList<Mod> modsToCheck = new ArrayList<>();
+            if(favOnly){
+                modsToCheck.addAll(ModManager.getFavorites());
+            }else {
+                modsToCheck.addAll(ModManager.mods.values());
+            }
+            for (Mod m : modsToCheck) {
                 boolean matchesSearch = search.getText().isEmpty() || m.name.toLowerCase().startsWith(search.getText().toLowerCase());
                 boolean matchesCategory = select.category == ModCategory.ALL || m.categories.contains(select.category);
 
@@ -173,6 +184,11 @@ public class ConfigGUI extends GuiScreen {
     }
 
     @Override
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
+        super.mouseReleased(mouseX, mouseY, state);
+    }
+
+    @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         search.mouseClicked(mouseX,mouseY,mouseButton);
@@ -198,6 +214,8 @@ public class ConfigGUI extends GuiScreen {
             select = (CategoryButton) button;
         }else if(button instanceof ConfigMod){
             ((ConfigMod)button).process();
+        }else if(button.id == 599){
+            favOnly = !favOnly;
         }
         updateModButtons();
     }

@@ -2,13 +2,13 @@ package com.github.veyzenclient.veyzenclient.features;
 
 import org.reflections.Reflections;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ModManager {
 
     public static Map<String,Mod> mods = new HashMap<>();
-
     private static String basePackage = "com.github.veyzenclient.veyzenclient";
 
     public Mod getMod(String id){
@@ -17,6 +17,14 @@ public class ModManager {
 
     public static void runButton(String runnableID){
 
+    }
+
+    public static ArrayList<Mod> getFavorites(){
+        ArrayList<Mod> favorites = new ArrayList<>();
+        for(Mod m : mods.values()){
+            if(m.favorite) favorites.add(m);
+        }
+        return favorites;
     }
 
     public static void drawMods(boolean dummy){
