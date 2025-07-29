@@ -16,6 +16,15 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Helper2D {
 
+
+    public static float getMCScale() {
+        int sc = Minecraft.getMinecraft().gameSettings.guiScale;
+        if (sc == 0) {
+            return 1.0f;
+        }
+        return 1f/sc;
+    }
+
     public static void drawMouseCenteredGradientRect(
             float x, float y, float width, float height,
             Color colorCenter, Color colorOuter, float mouseX, float mouseY

@@ -7,8 +7,8 @@ import com.github.veyzenclient.veyzenclient.utils.Helper2D;
 public class Switch extends Setting {
 
     private boolean enabled;
-    public Switch(boolean en,String i, String n, String d) {
-        super(i, n, d,40,20);
+    public Switch(boolean en,String i, String n, String d,String parent) {
+        super(i, n, d,40,20,parent);
         this.enabled = en;
     }
 

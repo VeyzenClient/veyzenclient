@@ -10,8 +10,8 @@ public class Text extends Setting {
 
     public String text;
     public Color c;
-    public Text(String i, String n, Color c, String text) {
-        super(i, n, "", 20, 20);
+    public Text(String i, String n, String parent,Color c, String text) {
+        super(i, n, "", 20, 20,parent);
         this.text = text;
         this.c = c;
     }
@@ -19,7 +19,8 @@ public class Text extends Setting {
     @Override
     public void render(int x, int y, int mX, int mY) {
         GlyphPageFontRenderer font = VeyzenClient.INSTANCE.fontHelper.size20;
-        font.drawString(name,x,y,c.getRGB());
-        font.drawString(text,x,y + font.getFontHeight(),c.getRGB());
+        GlyphPageFontRenderer font1 = VeyzenClient.INSTANCE.fontHelper.size30;
+        font1.drawString(name,x,y,c.getRGB());
+        font.drawString(text,x + 5 + font1.getStringWidth(name),y + font.getFontHeight(),VeyzenClient.fg.getRGB());
     }
 }

@@ -26,11 +26,17 @@ public class Mod {
         this.logo = logo;
         this.categories.addAll(Arrays.asList(categories));
         this.categories.add(ModCategory.ALL);
-        this.settings.addSetting(new Switch(true,"enabled","Enabled","Toggle Whether the Mod is Enabled/Disabled"));
+        this.settings.addSetting(new Switch(true,"enabled","Enabled","Toggle Whether the Mod is Enabled/Disabled","General"));
     }
 
     public Setting getSetting(String id){
         return this.settings.getSetting(id);
+    }
+    protected void addSetting(Setting s){
+        settings.addSetting(s);
+    }
+    public  ArrayList<Setting> getSettings(){
+        return settings.settings;
     }
 
     public void setSettings(ModSettings setting) {

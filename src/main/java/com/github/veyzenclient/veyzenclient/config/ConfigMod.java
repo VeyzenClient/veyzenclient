@@ -105,19 +105,15 @@ public class ConfigMod extends GuiButton {
     }
 
     public void process(){
-        if (mouseX >= settingX && mouseX <= settingX + settingW &&
-                mouseY >= settingY && mouseY <= settingY + settingH) {
-            System.out.println("Settings");
-        }
 
         if(mouseX >= favPosX && mouseX <= favPosX + favW && mouseY >= favPosY && mouseY <= favPosY + favW){
             m.setFavorite(!m.favorite);
-        }
-
-        if (mouseX >= toggleX && mouseX <= toggleX + toggleWidth &&
+        }else if (mouseX >= toggleX && mouseX <= toggleX + toggleWidth &&
                 mouseY >= toggleY && mouseY <= toggleY + toggleHeight) {
             m.getSetting("enabled").getAsType(Switch.class).toggle();
             System.out.println("Toggled: " + m.getSetting("enabled").getAsType(Switch.class).isEnabled());
+        }else {
+            VeyzenClient.config.openModConfig(m);
         }
     }
 

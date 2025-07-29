@@ -7,12 +7,14 @@ public abstract class Setting {
     public String id,name,desc;
     public int width,height;
     public int x,y;
-    public Setting(String i,String n,String d,int width,int height){
+    public String category;
+    public Setting(String i,String n,String d,int width,int height,String parent){
         id = i;
         name = n;
         desc = d;
         this.width = width;
         this.height = height;
+        category = parent;
     }
 
     public abstract void render(int x,int y,int mX,int mY);
@@ -45,6 +47,8 @@ public abstract class Setting {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getCategory() {return category;}
 
     public String getDesc() {
         return desc;

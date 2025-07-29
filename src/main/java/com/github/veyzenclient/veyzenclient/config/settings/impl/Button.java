@@ -10,8 +10,8 @@ public class Button extends Setting {
 
     public String runnableID , text;
     public boolean click = false;
-    public Button(String i, String n, String d,String runnableID,String text) {
-        super(i, n, d, 60,20);
+    public Button(String i, String n, String d,String parent,String runnableID,String text) {
+        super(i, n, d, 60,20,parent);
         this.runnableID = runnableID;
         this.text = text;
     }
@@ -20,7 +20,7 @@ public class Button extends Setting {
     public void render(int x, int y, int mX, int mY) {
         this.x = x;
         this.y = y;
-        Helper2D.drawRoundedRectangle(x,y,width,height,4, click ? VeyzenClient.fg.getRGB() : VeyzenClient.bgcomp.getRGB(),0);
+        Helper2D.drawRoundedRectangle(x,y,width,height,4, click ? VeyzenClient.fg.getRGB() : VeyzenClient.bg.getRGB(),0);
         GlyphPageFontRenderer font = VeyzenClient.INSTANCE.fontHelper.size20;
         int xPos = x + width/2 - font.getStringWidth(text) / 2;
         float yOffset = y + (height - font.getFontHeight()) / 2f;

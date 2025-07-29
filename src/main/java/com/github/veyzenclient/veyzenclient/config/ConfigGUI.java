@@ -28,6 +28,9 @@ public class ConfigGUI extends GuiScreen {
     public GuiTextField search;
     public static boolean favOnly;
 
+    public static ConfigGUI getInstance(){
+        return new ConfigGUI();
+    }
 
     public ConfigGUI(){
     this.scale = Minecraft.getMinecraft().gameSettings.guiScale;
@@ -35,11 +38,16 @@ public class ConfigGUI extends GuiScreen {
     this.search = new GuiTextField(1001, Minecraft.getMinecraft().fontRendererObj, 0, 0, 100, 20);
     }
 
+
     @Override
     public void onGuiClosed() {
         Minecraft.getMinecraft().gameSettings.guiScale = this.scale;
     }
 
+    public void openModConfig(Mod m) {
+        Minecraft.getMinecraft().gameSettings.guiScale = this.scale;
+        Minecraft.getMinecraft().displayGuiScreen(new ModConfigGUI(m));
+    }
     @Override
     public void initGui() {
         int xi = 0;

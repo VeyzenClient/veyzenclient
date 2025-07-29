@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class VeyzenClient {
     public static final String modID = "veyzen";
     public static final String modName = "Veyzen";
     public static final String modVersion = "1.0-beta [1.8.9]";
-
+    public static ConfigGUI config;
     public static Color bg = new Color(13,13,13), bgcomp = new Color(26,26,26),fg = new Color(155,170,255), text = new Color(239,240,244);
     public FontHelper fontHelper;
     @Mod.EventHandler
@@ -38,10 +39,11 @@ public class VeyzenClient {
     }
 
     @Mod.EventHandler
-    public void preInit(FMLInitializationEvent e){
+    public void init(FMLInitializationEvent e){
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(fontHelper);
         ModManager.register();
+        config = ConfigGUI.getInstance();
     }
 
     @SubscribeEvent

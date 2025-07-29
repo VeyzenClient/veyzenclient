@@ -23,8 +23,8 @@ public class ColorPicker extends Setting {
     private final int hueHeight = 100;
     private final int alphaWidth = 100;
 
-    public ColorPicker(String i, String n, String d,float h, float s, float b, float a) {
-        super(i, n, d, 120, 140);
+    public ColorPicker(String i, String n, String d,String parent,float h, float s, float b, float a) {
+        super(i, n, d, 120, 140,parent);
         hue = h;
         saturation = s;
         brightness = b;
@@ -75,7 +75,7 @@ public class ColorPicker extends Setting {
             Color c = new Color(getColor().getRed(), getColor().getGreen(), getColor().getBlue(), (int) (255 * (i / (float) alphaWidth)));
             drawPixelRect(x + i, alphaY, 1, 10, c.getRGB());
         }
-        Helper2D.drawRectangle(x, alphaY + 20, 50, 20, getColor().getRGB());
+        Helper2D.drawRectangle(x - 120, y + 2, 100, 100, getColor().getRGB());
         drawIndicators(x, y);
     }
 

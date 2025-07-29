@@ -1,5 +1,6 @@
 package com.github.veyzenclient.veyzenclient.config.settings.impl;
 
+import com.github.veyzenclient.veyzenclient.VeyzenClient;
 import com.github.veyzenclient.veyzenclient.config.settings.Setting;
 import com.github.veyzenclient.veyzenclient.utils.Helper2D;
 import net.minecraft.client.Minecraft;
@@ -27,12 +28,10 @@ public class TextField extends Setting {
     private static final long INITIAL_REPEAT_DELAY = 400;
     private static final long REPEAT_INTERVAL = 50;
 
-    private final Color backgroundColor = new Color(26, 26, 26);
-    private final Color foregroundColor = new Color(255, 166, 0);
 
 
-    public TextField(String id, String name, String desc, TextFilter filter, String text, int maxLength) {
-        super(id, name, desc, 150, 25);
+    public TextField(String id, String name, String desc, String parent,TextFilter filter, String text, int maxLength) {
+        super(id, name, desc, 150, 25,parent);
         this.text = text;
         this.filter = filter;
         this.maxLength = maxLength;
@@ -46,13 +45,13 @@ public class TextField extends Setting {
 
         FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 
-        Helper2D.drawRectangle(x, y, width, height, backgroundColor.getRGB());
+        Helper2D.drawRectangle(x, y, width, height, VeyzenClient.bg.getRGB());
 
         // Border
-        Helper2D.drawRectangle(x - 1, y - 1, width + 2, 1, foregroundColor.getRGB());
-        Helper2D.drawRectangle(x - 1, y + height, width + 2, 1, foregroundColor.getRGB());
-        Helper2D.drawRectangle(x - 1, y, 1, height, foregroundColor.getRGB());
-        Helper2D.drawRectangle(x + width, y, 1, height, foregroundColor.getRGB());
+        Helper2D.drawRectangle(x - 1, y - 1, width + 2, 1, VeyzenClient.fg.getRGB());
+        Helper2D.drawRectangle(x - 1, y + height, width + 2, 1, VeyzenClient.fg.getRGB());
+        Helper2D.drawRectangle(x - 1, y, 1, height, VeyzenClient.fg.getRGB());
+        Helper2D.drawRectangle(x + width, y, 1, height, VeyzenClient.fg.getRGB());
 
         // Scroll logic
         int maxTextWidth = width - 8;
@@ -67,7 +66,7 @@ public class TextField extends Setting {
         int textX = x + 4;
         int textY = y + (height - fr.FONT_HEIGHT) / 2;
 
-        fr.drawString(beforeCursor, textX, textY, foregroundColor.getRGB());
+        fr.drawString(beforeCursor, textX, textY, VeyzenClient.fg.getRGB());
         int cursorX = textX + fr.getStringWidth(beforeCursor);
 
         if (focused) {
@@ -76,11 +75,11 @@ public class TextField extends Setting {
                 lastBlink = System.currentTimeMillis();
             }
             if (blink) {
-                Helper2D.drawRectangle(cursorX, textY, 1, fr.FONT_HEIGHT, foregroundColor.getRGB());
+                Helper2D.drawRectangle(cursorX, textY, 1, fr.FONT_HEIGHT, VeyzenClient.fg.getRGB());
             }
         }
 
-        fr.drawString(afterCursor, cursorX + 1, textY, new Color(255, 166, 0, 150).getRGB());
+        fr.drawString(afterCursor, cursorX + 1, textY, VeyzenClient.fg.getRGB());
         update();
     }
 

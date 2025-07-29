@@ -11,15 +11,16 @@ public class Slider extends Setting {
     public boolean dragging;
     public boolean hovered = false;
     public float step = 0.01f;
-    public Slider(String i, String n, String d, float minValue,float maxValue,float defValue) {
-        super(i, n, d, 100, 10);
+    public Slider(String i, String n, String d, String parent,float minValue,float maxValue,float defValue) {
+        super(i, n, d, 140, 20,parent);
         this.cur = defValue;
         this.max = maxValue;
         this.min = minValue;
+        this.step = 0.01f;
     }
 
-    public Slider(String i, String n, String d, float minValue,float maxValue,float defValue, float step) {
-        super(i, n, d, 100, 10);
+    public Slider(String i, String n, String d, String parent,float minValue,float maxValue,float defValue, float step) {
+        super(i, n, d, 140, 20,parent);
         this.cur = defValue;
         this.max = maxValue;
         this.min = minValue;
