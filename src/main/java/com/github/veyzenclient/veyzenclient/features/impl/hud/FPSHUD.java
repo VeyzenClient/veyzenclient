@@ -2,6 +2,7 @@ package com.github.veyzenclient.veyzenclient.features.impl.hud;
 
 import com.github.veyzenclient.veyzenclient.VeyzenClient;
 import com.github.veyzenclient.veyzenclient.config.settings.impl.ColorPicker;
+import com.github.veyzenclient.veyzenclient.config.settings.impl.Switch;
 import com.github.veyzenclient.veyzenclient.config.settings.impl.TextField;
 import com.github.veyzenclient.veyzenclient.features.ModCategory;
 import com.github.veyzenclient.veyzenclient.features.ModHUD;
@@ -15,23 +16,28 @@ import java.awt.*;
 @Register
 public class FPSHUD extends ModHUD {
 
-	public FPSHUD() {
-		super(15, 15, 60, 20, "fps", "FPS HUD", "Displays current FPS.",
-		new ResourceLocation(VeyzenClient.NAMESPACE, "icons/mods/fps.png"), ModCategory.QOL
-        );
-		addSetting(new TextField("fpstextfield", "Prefix", "Text before FPS", "General", TextField.TextFilter.ALL, "FPS", 32));
-	    addSetting(new TextField("fpstextfield2", "Separator", "FPS Separator", "General", TextField.TextFilter.ALL, ":", 32));
-		addSetting(new ColorPicker("fpscolor", "Color", "Text color", "General", 1f, 1f, 1f, 1f));
+    public FPSHUD() {
+        super(15, 15, 60, 20, "fps", "FPS HUD", "Displays current FPS.", new ResourceLocation(VeyzenClient.NAMESPACE, "icons/mods/fps.png"), ModCategory.QOL);
+
+        addSetting(new Switch(true, "enabled", "Enabled", "Toggle FPS HUD", "General"));
+        addSetting(new TextField("fpstextfield", "Prefix", "Text before FPS", "General", TextField.TextFilter.ALL, "FPS", 32));
+        addSetting(new TextField("fpstextfield2", "Separator", "FPS Separator", "General", TextField.TextFilter.ALL, ":", 32));
+        addSetting(new ColorPicker("fpscolor", "Text Color", "Color of the FPS text", "General", 1f, 1f, 1f, 1f));
+        addSetting(new Switch(true, "showbg", "Show Background", "Toggle background rectangle", "General"));
+        addSetting(new ColorPicker("bgcolor", "Background Color", "Solid background color", "General", 0f, 0f, 0f, 0.5f));
     }
 
     @Override
-	public void render() {
+    public void render() {
+        if (!getSetting("enabled").getAsType(Switch.class).isEnabled()) return;
+
         Minecraft mc = Minecraft.getMinecraft();
 
         String prefix = ((TextField) getSetting("fpstextfield")).getText();
-	    String separator = ((TextField) getSetting("fpstextfield2")).getText();
-        Color rgba = ((ColorPicker) getSetting("fpscolor")).getColor();
-		int color = (rgba.getAlpha() << 24) | (rgba.getRed() << 16) | (rgba.getGreen() << 8) | rgba.getBlue();
+        String separator = ((TextField) getSetting("fpstextfield2")).getText();
+        Color textColor = ((ColorPicker) getSetting("fpscolor")).getColor();
+        boolean showBackground = getSetting("showbg").getAsType(Switch.class).isEnabled();
+        Color backgroundColor = ((ColorPicker) getSetting("bgcolor")).getColor();
 
         String text = prefix + separator + " " + mc.getDebugFPS();
         int textWidth = mc.fontRendererObj.getStringWidth(text);
@@ -45,14 +51,19 @@ public class FPSHUD extends ModHUD {
         int x = getRenderX();
         int y = getRenderY();
 
-        int glass = new Color(1f, 1f, 1f, 0.08f).getRGB();
-        int gradTop = new Color(1f, 1f, 1f, 0.05f).getRGB();
-        int gradBot = new Color(1f, 1f, 1f, 0.01f).getRGB();
-        int outline = new Color(1f, 1f, 1f, 0.12f).getRGB();
+        if (showBackground) {
+            int bgColor = (backgroundColor.getAlpha() << 24)
+				| (backgroundColor.getRed() << 16)
+				| (backgroundColor.getGreen() << 8)
+				| backgroundColor.getBlue();
+            Helper2D.drawRoundedRectangle(x, y, w, h, 4, bgColor, 1);
+        }
 
-        Helper2D.drawRoundedRectangle(x, y, w, h, 6, glass, 0);
-        Helper2D.drawGradientRectangle(x, y, w, h, gradTop, gradBot);
-        Helper2D.drawOutlinedRectangle(x, y, w, h, 1, outline);
-        Helper2D.drawCenteredString(mc.fontRendererObj, text, x + w / 2, y + (h - 8) / 2, color);
+        int color = (textColor.getAlpha() << 24)
+			| (textColor.getRed() << 16)
+			| (textColor.getGreen() << 8)
+			| textColor.getBlue();
+
+        VeyzenClient.INSTANCE.fontHelper.size20.drawString(text, x + w / 2, y + (h - 8) / 2, color);
     }
 }

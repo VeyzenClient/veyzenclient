@@ -77,7 +77,7 @@ public class ConfigMod extends GuiButton {
             GlyphPageFontRenderer font = VeyzenClient.INSTANCE.fontHelper.size30;
             font.drawString(m.name,xPosition + 5,yPosition + 5,VeyzenClient.text.getRGB());
 
-           boolean enabled = m.getSetting("enabled").getAsType(Switch.class).isEnabled();
+            boolean enabled = m.getSetting("enabled").getAsType(Switch.class).isEnabled();
             int color = enabled ? new Color(25,68,27).getRGB() : VeyzenClient.bgcomp.getRGB();
             String text = enabled ? "Enabled" : "Disabled";
             float xPos = toggleX + (float) toggleWidth / 2 - (float) font.getStringWidth(text) / 2;
