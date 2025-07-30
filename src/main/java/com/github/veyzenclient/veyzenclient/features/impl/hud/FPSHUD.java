@@ -30,8 +30,8 @@ public class FPSHUD extends ModHUD {
 
         String prefix = ((TextField) getSetting("fpstextfield")).getText();
 	    String separator = ((TextField) getSetting("fpstextfield2")).getText();
-        float[] rgba = ((ColorPicker) getSetting("fpscolor")).getColor().getColorComponents(null);
-        int color = ((int)(rgba[0] * 255) << 16) | ((int)(rgba[1] * 255) << 8) | ((int)(rgba[2] * 255)) | ((int)(rgba[3] * 255) << 24);
+        Color rgba = ((ColorPicker) getSetting("fpscolor")).getColor();
+		int color = (rgba.getAlpha() << 24) | (rgba.getRed() << 16) | (rgba.getGreen() << 8) | rgba.getBlue();
 
         String text = prefix + separator + " " + mc.getDebugFPS();
         int textWidth = mc.fontRendererObj.getStringWidth(text);
