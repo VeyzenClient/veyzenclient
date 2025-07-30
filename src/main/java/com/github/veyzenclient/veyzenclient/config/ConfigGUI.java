@@ -33,9 +33,9 @@ public class ConfigGUI extends GuiScreen {
     }
 
     public ConfigGUI(){
-    this.scale = Minecraft.getMinecraft().gameSettings.guiScale;
-    Minecraft.getMinecraft().gameSettings.guiScale = 1;
-    this.search = new GuiTextField(1001, Minecraft.getMinecraft().fontRendererObj, 0, 0, 100, 20);
+		this.scale = Minecraft.getMinecraft().gameSettings.guiScale;
+        Minecraft.getMinecraft().gameSettings.guiScale = 1;
+        this.search = new GuiTextField(1001, Minecraft.getMinecraft().fontRendererObj, 0, 0, 100, 20);
     }
 
 
