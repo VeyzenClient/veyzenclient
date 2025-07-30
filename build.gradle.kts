@@ -76,8 +76,6 @@ dependencies {
         isTransitive = false
     }
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT")
-    
-    shadowImpl("org.slick2d:slick2d-core:1.0.0")
 
     implementation("org.reflections:reflections:0.10.2")
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.2.1")

@@ -75,47 +75,49 @@ public class ConfigGUI extends GuiScreen {
     }
 
     private void updateModButtons() {
-        this.buttonList.removeIf(mod -> mod instanceof ConfigMod);
-        ArrayList<Mod> mods = getMods();
-        int totalMods = mods.size();
-        int rows = (int) Math.ceil(totalMods / 4.0);
-        int maxScroll = Math.max(0, rows - 3);
+		for (int i = 0; i < buttonList.size(); i++) {
+			GuiButton b = buttonList.get(i);
+			if (b instanceof ConfigMod) {
+				buttonList.remove(i);
+				i--;
+			}
+		}
 
-        scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
-        ScaledResolution sr = new ScaledResolution(mc);
-        int xStart = sr.getScaledWidth() / 2 - menuWidth / 2 + 10;
-        int yStart = sr.getScaledHeight() / 2 - menuHeight / 2 + 45;
-        int xOffset = 200;
-        int yOffset = 130;
-        int i = 0, xI = 0, yI = 0;
-        for (Mod m : mods) {
-            if (i % 4 == 0 && i != 0) {
-                xI = 0;
-                yI++;
-            }
+		ArrayList<Mod> mods = getMods();
+		int totalMods = mods.size();
+		int rows = (int) Math.ceil(totalMods / 4.0);
+		int maxScroll = Math.max(0, rows - 3);
 
-            if (yI < scrollOffset) {
-                i++;
-                xI++;
-                continue;
-            }
+		scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
+		ScaledResolution sr = new ScaledResolution(mc);
+		int xStart = sr.getScaledWidth() / 2 - menuWidth / 2 + 10;
+		int yStart = sr.getScaledHeight() / 2 - menuHeight / 2 + 45;
+		int xOffset = 200;
+		int yOffset = 130;
+		int i = 0, xI = 0, yI = 0;
 
-            int x = xStart + (xOffset * xI);
-            int y = yStart + (yOffset * (yI - scrollOffset));
-            if(x < sr.getScaledWidth() / 2 + menuWidth / 2 && y < sr.getScaledHeight() / 2 + menuHeight / 2){
-                this.buttonList.add(new ConfigMod(i, x, y, m));
-            }
+		for (Mod m : mods) {
+			if (i % 4 == 0 && i != 0) {
+				xI = 0;
+				yI++;
+			}
 
-            i++;
-            xI++;
-        }
-        int count = 0;
-        for(GuiButton b : buttonList){
-            if(b instanceof ConfigMod){
-                count++;
-            }
-        }
-    }
+			if (yI < scrollOffset) {
+				i++;
+				xI++;
+				continue;
+			}
+
+			int x = xStart + (xOffset * xI);
+			int y = yStart + (yOffset * (yI - scrollOffset));
+			if (x < sr.getScaledWidth() / 2 + menuWidth / 2 && y < sr.getScaledHeight() / 2 + menuHeight / 2) {
+				this.buttonList.add(new ConfigMod(i, x, y, m));
+			}
+
+			i++;
+			xI++;
+		}
+	}
 
     private ArrayList<Mod> getMods() {
             ArrayList<Mod> mods = new ArrayList<>();
@@ -227,6 +229,4 @@ public class ConfigGUI extends GuiScreen {
         }
         updateModButtons();
     }
-
-
 }

@@ -1,6 +1,5 @@
 package com.github.veyzenclient.veyzenclient.config;
 
-
 import com.github.veyzenclient.veyzenclient.VeyzenClient;
 import com.github.veyzenclient.veyzenclient.config.buttons.SettingCategoryButton;
 import com.github.veyzenclient.veyzenclient.config.settings.Setting;
@@ -115,22 +114,31 @@ public class ModConfigGUI extends GuiScreen {
     }
 
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
-        renderSettings.forEach(s -> s.mouseClick(mouseX,mouseY,mouseButton));
-    }
+	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+		super.mouseClicked(mouseX, mouseY, mouseButton);
+		for (int i = 0; i < renderSettings.size(); i++) {
+			Setting s = renderSettings.get(i);
+			s.mouseClick(mouseX, mouseY, mouseButton);
+		}
+	}
 
-    @Override
-    protected void mouseReleased(int mouseX, int mouseY, int state) {
-        super.mouseReleased(mouseX, mouseY, state);
-        renderSettings.forEach(s -> s.mouseReleased(mouseX,mouseY,state));
-    }
+	@Override
+	protected void mouseReleased(int mouseX, int mouseY, int state) {
+		super.mouseReleased(mouseX, mouseY, state);
+		for (int i = 0; i < renderSettings.size(); i++) {
+			Setting s = renderSettings.get(i);
+			s.mouseReleased(mouseX, mouseY, state);
+		}
+	}
 
-    @Override
-    protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        super.keyTyped(typedChar, keyCode);
-        renderSettings.forEach(s -> s.keyTyped(typedChar,keyCode));
-    }
+	@Override
+	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		super.keyTyped(typedChar, keyCode);
+		for (int i = 0; i < renderSettings.size(); i++) {
+			Setting s = renderSettings.get(i);
+			s.keyTyped(typedChar, keyCode);
+		}
+	}
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {

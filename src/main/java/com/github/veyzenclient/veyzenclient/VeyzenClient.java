@@ -4,7 +4,6 @@ import com.github.veyzenclient.veyzenclient.config.ConfigGUI;
 import com.github.veyzenclient.veyzenclient.features.ModHUD;
 import com.github.veyzenclient.veyzenclient.features.ModManager;
 import com.github.veyzenclient.veyzenclient.font.FontHelper;
-import com.github.veyzenclient.veyzenclient.utils.FontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -33,7 +32,6 @@ public class VeyzenClient {
     public FontHelper fontHelper;
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e){
-        FontRenderer.initFont();
         fontHelper = new FontHelper();
         fontHelper.init();
     }

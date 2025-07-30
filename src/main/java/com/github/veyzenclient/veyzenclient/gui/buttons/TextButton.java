@@ -1,8 +1,6 @@
 package com.github.veyzenclient.veyzenclient.gui.buttons;
 
-
 import com.github.veyzenclient.veyzenclient.VeyzenClient;
-import com.github.veyzenclient.veyzenclient.utils.FontRenderer;
 import com.github.veyzenclient.veyzenclient.utils.Helper2D;
 import com.github.veyzenclient.veyzenclient.utils.MathHelper;
 import com.github.veyzenclient.veyzenclient.utils.animation.Animate;

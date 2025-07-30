@@ -1,7 +1,6 @@
 package com.github.veyzenclient.veyzenclient.splash;
 
 import com.github.veyzenclient.veyzenclient.VeyzenClient;
-import com.github.veyzenclient.veyzenclient.utils.FontRenderer;
 import com.github.veyzenclient.veyzenclient.utils.Helper2D;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
