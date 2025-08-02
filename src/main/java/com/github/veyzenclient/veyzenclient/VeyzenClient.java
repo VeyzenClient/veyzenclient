@@ -3,7 +3,6 @@ package com.github.veyzenclient.veyzenclient;
 import com.github.veyzenclient.veyzenclient.config.pages.ConfigScreen;
 import com.github.veyzenclient.veyzenclient.features.ModManager;
 import com.github.veyzenclient.veyzenclient.font.FontHelper;
-import com.github.veyzenclient.veyzenclient.utils.FontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -32,7 +31,6 @@ public class VeyzenClient {
     public FontHelper fontHelper;
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e){
-        FontRenderer.initFont();
         fontHelper = new FontHelper();
         fontHelper.init();
         configKey = new KeyBinding("Open Config Menu", Keyboard.KEY_RSHIFT,"Veyzen Client");

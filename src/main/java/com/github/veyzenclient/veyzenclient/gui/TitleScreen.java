@@ -4,7 +4,6 @@ import com.github.veyzenclient.veyzenclient.VeyzenClient;
 import com.github.veyzenclient.veyzenclient.font.GlyphPageFontRenderer;
 import com.github.veyzenclient.veyzenclient.gui.buttons.IconButton;
 import com.github.veyzenclient.veyzenclient.gui.buttons.TextButton;
-import com.github.veyzenclient.veyzenclient.utils.FontRenderer;
 import com.github.veyzenclient.veyzenclient.utils.Helper2D;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiOptions;
@@ -92,12 +91,12 @@ public class TitleScreen extends Panorama {
     }
 
     /**
-     * Draws the main "Cloud" Text and the Logo in the middle
+     * Draws the main "Veyzen" Text and the Logo in the middle
      */
 
     private void drawLogo() {
         GlyphPageFontRenderer fontRenderer = VeyzenClient.INSTANCE.fontHelper.size40;
-        fontRenderer.drawString(VeyzenClient.modName, width / 2f - fontRenderer.getStringWidth(VeyzenClient.modName) / 2f, height / 2f - 27.5f, 0xffffffff);
+        fontRenderer.drawString("Veyzen", width / 2f - fontRenderer.getStringWidth(VeyzenClient.modName) / 2f, height / 2f - 27.5f, 0xffffffff);
         Helper2D.drawPicture(width / 2 - 30, height / 2 - 80, 60, 60, 0xffffffff, new ResourceLocation("veyzen","logo.png"));
     }
 
@@ -108,7 +107,7 @@ public class TitleScreen extends Panorama {
     private void drawCopyright() {
         GlyphPageFontRenderer fontRenderer = VeyzenClient.INSTANCE.fontHelper.size20;
         String copyright = "Copyright Mojang Studios. Do not distribute!";
-        String text = VeyzenClient.modName + " Client " + VeyzenClient.modVersion;
+        String text = "Veyzen" + " Client " + VeyzenClient.modVersion;
         fontRenderer.drawString(copyright, width - fontRenderer.getStringWidth(copyright) - 2, height - fontRenderer.getFontHeight(), 0xffffffff);
         fontRenderer.drawString(text, 4, height - fontRenderer.getFontHeight(), 0xffffffff);
     }
