@@ -21,4 +21,20 @@ public class ResolutionHelper {
         scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
         return scaledResolution.getScaleFactor();
     }
+
+    public static float getXRatio(int x) {
+        return x / 1920f;
+    }
+
+    public static float getXStatic(int x){
+        return getWidth() * getXRatio(x);
+    }
+
+    public static float getYStatic(int y){
+        return getHeight() * getYRatio(y);
+    }
+
+    public static float getYRatio(int y) {
+        return y / 1080f;
+    }
 }

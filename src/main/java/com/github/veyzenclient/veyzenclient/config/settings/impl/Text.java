@@ -21,6 +21,6 @@ public class Text extends Setting {
         GlyphPageFontRenderer font = VeyzenClient.INSTANCE.fontHelper.size20;
         GlyphPageFontRenderer font1 = VeyzenClient.INSTANCE.fontHelper.size30;
         font1.drawString(name,x,y,c.getRGB());
-        font.drawString(text,x + 5 + font1.getStringWidth(name),y + font.getFontHeight(),VeyzenClient.fg.getRGB());
+        font.drawString(text,x + 5 + font1.getStringWidth(name),y ,VeyzenClient.fg.getRGB());
     }
 }

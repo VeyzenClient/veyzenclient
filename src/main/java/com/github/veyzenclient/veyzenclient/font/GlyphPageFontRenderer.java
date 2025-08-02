@@ -192,6 +192,14 @@ public class GlyphPageFontRenderer {
         }
     }
 
+    public void drawScaledString(String text, float x, float y, float size, int color) {
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, 0);
+        GlStateManager.scale(size, size, 1);
+        drawString(text, 0, 0, color);
+        GlStateManager.popMatrix();
+    }
+
     /**
      * Render a single line string at the current (posX,posY) and update posX
      */
