@@ -29,7 +29,6 @@ public class FPSHUD extends ModHUD {
 
     @Override
     public void render() {
-        if (!getSetting("enabled").getAsType(Switch.class).isEnabled()) return;
 
         Minecraft mc = Minecraft.getMinecraft();
 
@@ -39,11 +38,11 @@ public class FPSHUD extends ModHUD {
         boolean showBackground = getSetting("showbg").getAsType(Switch.class).isEnabled();
         Color backgroundColor = ((ColorPicker) getSetting("bgcolor")).getColor();
 
-        String text = prefix + separator + " " + mc.getDebugFPS();
+        String text = prefix + separator + " " + Minecraft.getDebugFPS();
         int textWidth = mc.fontRendererObj.getStringWidth(text);
         int padding = 6;
         int w = textWidth + padding * 2;
-        int h = 18;
+        int h = 20;
 
         this.width = w;
         this.height = h;
@@ -53,10 +52,10 @@ public class FPSHUD extends ModHUD {
 
         if (showBackground) {
             int bgColor = (backgroundColor.getAlpha() << 24)
-				| (backgroundColor.getRed() << 16)
-				| (backgroundColor.getGreen() << 8)
-				| backgroundColor.getBlue();
-            Helper2D.drawRoundedRectangle(x, y, w, h, 4, bgColor, 1);
+                    | (backgroundColor.getRed() << 16)
+                    | (backgroundColor.getGreen() << 8)
+                    | backgroundColor.getBlue();
+            Helper2D.drawRoundedRectangle(x, y, w, h, 4, bgColor, 0);
         }
 
         int color = (textColor.getAlpha() << 24)
@@ -64,6 +63,6 @@ public class FPSHUD extends ModHUD {
 			| (textColor.getGreen() << 8)
 			| textColor.getBlue();
 
-        VeyzenClient.INSTANCE.fontHelper.size20.drawString(text, x + w / 2, y + (h - 8) / 2, color);
+        VeyzenClient.INSTANCE.fontHelper.size20.drawString(text, x + w / 2f - VeyzenClient.INSTANCE.fontHelper.size20.getStringWidth(text) / 2f, y + (h - 8) / 2f, color);
     }
 }

@@ -43,6 +43,7 @@ public class VeyzenClient {
         MinecraftForge.EVENT_BUS.register(fontHelper);
         ModManager.register();
         ClientRegistry.registerKeyBinding(configKey);
+        ModManager.addGlobalSettings();
     }
 
     @SubscribeEvent

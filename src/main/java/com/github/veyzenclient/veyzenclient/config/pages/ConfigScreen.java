@@ -11,8 +11,10 @@ import com.github.veyzenclient.veyzenclient.utils.Helper2D;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -39,7 +41,7 @@ public class ConfigScreen extends GuiScreen {
     private float scrollOffset = 0;
     private float targetScrollOffset = 0;
     private float maxScrollOffset = 0;
-    public static boolean favOnly = true;
+    public static boolean favOnly = false;
     public CategoryButton selected;
     @Override
     public void initGui() {
@@ -191,7 +193,7 @@ public class ConfigScreen extends GuiScreen {
         Helper2D.drawRoundedRectangle((int)xSet,(int)ySet,(int)wSet,(int)hSet,4,VeyzenClient.bg.getRGB(),0);
         Helper2D.drawRoundedRectangle((int)xHud,(int)yHud,(int)wHud,(int)hHud,4,VeyzenClient.bg.getRGB(),0);
         Helper2D.drawRoundedRectangle((int)xMc,(int)yMc,(int)wMc,(int)hMc,4,VeyzenClient.bg.getRGB(),0);
-        Helper2D.drawPicture((int)xLogo,(int)yLogo,(int)wLogo,(int)hLogo, Color.white.getRGB(),new ResourceLocation("veyzen","veyzen_nobg.png"));
+        Helper2D.drawPicture((int)xLogo,(int)yLogo,(int)wLogo,(int)hLogo, VeyzenClient.fg.getRGB(),new ResourceLocation("veyzen","veyzen_nobg.png"));
         Helper2D.drawPicture((int)xSet,(int)ySet,(int)wSet,(int)hSet,VeyzenClient.text.getRGB(),new ResourceLocation("veyzen","icons/settings.png"));
         Helper2D.drawPicture((int)xHud,(int)yHud,(int)wHud,(int)hHud,VeyzenClient.text.getRGB(),new ResourceLocation("veyzen","icons/hud.png"));
         Helper2D.drawPicture((int)xMc,(int)yMc,(int)wMc,(int)hMc,VeyzenClient.text.getRGB(),new ResourceLocation("veyzen","icons/mcsetting.png"));
@@ -245,7 +247,7 @@ public class ConfigScreen extends GuiScreen {
         }
         if(mouseX > xMc && mouseX < xMc + wMc){
             if(mouseY > yMc && mouseY < yMc + hMc){
-                System.out.println("Mc Settings");
+                mc.displayGuiScreen(new GuiOptions(this,mc.gameSettings));
                 mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
             }
         }

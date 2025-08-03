@@ -19,9 +19,9 @@ public class ColorPicker extends Setting {
     private boolean draggingSB = false;
     private boolean draggingHue = false;
     private boolean draggingAlpha = false;
-    private final int sbSize = 100;
-    private final int hueHeight = 100;
-    private final int alphaWidth = 100;
+    private final int sbSize = 50;
+    private final int hueHeight = 50;
+    private final int alphaWidth = 50;
 
     public ColorPicker(String i, String n, String d,String parent,float h, float s, float b, float a) {
         super(i, n, d, 120, 140,parent);
@@ -75,7 +75,7 @@ public class ColorPicker extends Setting {
             Color c = new Color(getColor().getRed(), getColor().getGreen(), getColor().getBlue(), (int) (255 * (i / (float) alphaWidth)));
             drawPixelRect(x + i, alphaY, 1, 10, c.getRGB());
         }
-        Helper2D.drawRectangle(x - 120, y + 2, 100, 100, getColor().getRGB());
+        Helper2D.drawRectangle(x + 5, y + sbSize + 25 , 15, 15, getColor().getRGB());
         drawIndicators(x, y);
     }
 
