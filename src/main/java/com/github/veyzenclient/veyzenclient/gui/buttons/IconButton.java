@@ -30,13 +30,6 @@ public class IconButton {
         animate.setEase(Easing.LINEAR).setMin(0).setMax(25).setSpeed(200);
     }
 
-    /**
-     * Renders the button with the position, width and height taken from the constructor
-     *
-     * @param mouseX The current X position of the mouse
-     * @param mouseY The current Y position of the mouse
-     */
-
     public void renderButton(int x, int y, int mouseX, int mouseY) {
         this.x = x;
         this.y = y;
@@ -50,12 +43,12 @@ public class IconButton {
 
         isHoveredLast = isHovered;
 
-        Helper2D.drawRoundedRectangle(x, y, w, h, 2,
-                isHovered ? new Color(255, 59, 59, 255).getRGB() : new Color(139, 0, 0, 255).getRGB(),
-                0
-        );
+        Helper2D.drawRoundedRectangle(x, y, w, h, 6,
+									  isHovered ? new Color(255, 80, 80, 200).getRGB() : new Color(200, 50, 50, 150).getRGB(),
+									  isHovered ? new Color(255, 255, 255, 60).getRGB() : 0
+									  );
 
-        Helper2D.drawPicture(x, y, w, h, 0xffffffff, new ResourceLocation("veyzen","icons/" + icon + ".png"));
+        Helper2D.drawPicture(x + 2, y + 2, w - 4, h - 4, 0xffffffff, new ResourceLocation("veyzen","icons/" + icon + ".png"));
     }
 
     public boolean isHovered(int mouseX, int mouseY) {

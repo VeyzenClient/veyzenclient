@@ -25,7 +25,7 @@ public class VeyzenClient {
 
     public static final String NAMESPACE = "veyzen";
     public static final String modName = "Veyzen";
-    public static final String modVersion = "1.0-beta [1.8.9]";
+    public static final String modVersion = "0.1-beta";
     public static KeyBinding configKey;
     public static Color bg = new Color(217,217,217), bgcomp = new Color(183,183,183),fg = new Color(155,170,255), text = new Color(12,12,12);
     public FontHelper fontHelper;

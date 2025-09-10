@@ -29,13 +29,6 @@ public class TextButton {
         animate.setEase(Easing.LINEAR).setMin(0).setMax(25).setSpeed(200);
     }
 
-    /**
-     * Renders the button with the position, width and height taken from the constructor
-     *
-     * @param mouseX The current X position of the mouse
-     * @param mouseY The current Y position of the mouse
-     */
-
     public void renderButton(int x, int y, int mouseX, int mouseY) {
         this.x = x;
         this.y = y;
@@ -49,18 +42,19 @@ public class TextButton {
 
         isHoveredLast = isHovered;
 
-        Helper2D.drawRoundedRectangle(x, y, w, h, 2,
-                isHovered ? new Color(55, 59, 69, 255).getRGB() : new Color(49, 51, 56, 255).getRGB(),
-                0
-        );
+        Helper2D.drawRoundedRectangle(x, y, w, h, 8,
+									  isHovered ? new Color(70, 70, 70, 180).getRGB() : new Color(50, 50, 50, 120).getRGB(),
+									  isHovered ? new Color(255, 255, 255, 40).getRGB() : 0
+									  );
 
         VeyzenClient.INSTANCE.fontHelper.size20.drawString(
-                text,
-                x + w / 2f - VeyzenClient.INSTANCE.fontHelper.size20.getStringWidth(text) / 2f,
-                y + h / 2f - 4,
-                0xffffffff
+			text,
+			x + w / 2f - VeyzenClient.INSTANCE.fontHelper.size20.getStringWidth(text) / 2f,
+			y + h / 2f - 4,
+			0xffffffff
         );
     }
+
     public boolean isHovered(int mouseX, int mouseY) {
         return MathHelper.withinBox(x, y, w, h, mouseX, mouseY);
     }
